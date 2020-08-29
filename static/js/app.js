@@ -1,8 +1,8 @@
-// Select the id of the dropdown 
+// Select the id of the dropdown component from the html 
 
 var dropDownComponent = d3.select("#selDataset");
 
-// Function to populate the dropdown with values
+// Function to populate the dropdown with values dynamically
 function displayDropDownValues(){
     
     d3.json("static/data/samples.json").then((data) => {
@@ -15,11 +15,11 @@ function displayDropDownValues(){
         
         });
     });     
-    // Call the init_display to display the data of sample_id 940 by default when the page loads
+    // Call the init_display function to display the data of sample_id 940 by default when the page loads
     init_display(940);
 }
 
-//  This function calls the function subjectDetails which is used to display all data and plots
+//  This function init_display() calls another function subjectDetails which is used to display all data and plots
 function init_display(id){
     subjectDetails(id);
 }
@@ -30,7 +30,7 @@ displayDropDownValues()
 // Create an event listener for the dropdown when value is changed
 dropDownComponent.on("change",dropdownchange);
 
-// The callback for the event listener, it calls anothe function subjectDetails to display all data
+// The callback for the event listener, it calls another function subjectDetails to display all data
 // and plots of the ID selected in the dropdown
 function dropdownchange()
 {
@@ -47,7 +47,7 @@ function subjectDetails(id){
     d3.json("static/data/samples.json").then((data) => {
         var metadata = data.metadata;
         var sampledata = data.samples;
-        // console.log(metadata);
+        
         
         // Filter the metadata releated info for a particular ID
         var filteredMetaData = metadata.filter(row => row['id'] == id);
@@ -100,7 +100,7 @@ function subjectDetails(id){
         }
         // Call the function to sort the sample data based on the otu values
         sortData = sortobject(data);
-        // console.log(sortData);
+        
 
         // Slice the sorted data to get top ten values
         slicedData =sortData.slice(0,10);
@@ -115,9 +115,7 @@ function subjectDetails(id){
         y_bar = reversedData.map((row) => "OTU " + row[1]['otu_id']);
         text_labels = reversedData.map((row) => row[1]['otu_label']);
 
-        console.log(x_bar);
-        console.log(y_bar);
-
+        
         // Create a trace for barplot
         var trace1 = {
             x: x_bar,
