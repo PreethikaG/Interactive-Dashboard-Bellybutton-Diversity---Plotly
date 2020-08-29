@@ -104,7 +104,7 @@ function subjectDetails(id){
 
         // Slice the sorted data to get top ten values
         slicedData =sortData.slice(0,10);
-        console.log(slicedData);
+        
 
         // Reverse the sliced data for plotting the barchart
         reversedData = slicedData.reverse();
